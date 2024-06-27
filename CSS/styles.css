@@ -1,0 +1,18 @@
+
+
+.table-admin {
+    .table-body {
+        tr:nth-child(even) {
+            background-color: aquamarine;
+        }
+    }
+
+    .product-image {
+        img {
+            width: 75px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+}
