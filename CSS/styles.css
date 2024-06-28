@@ -7,6 +7,28 @@
         }
     }
 
+    .product-accion {
+        vertical-align: middle;
+
+        .btn {
+            width: 24px;
+            margin: 0 auto;
+            padding: 5px 0;
+            text-align: center;
+            
+        }
+    }
+
+    .product-description {
+        .description {
+            display: -webkit-box;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        }
+        
+        
+    }
     .product-image {
         img {
             width: 75px;
