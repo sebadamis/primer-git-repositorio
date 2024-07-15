@@ -1,7 +1,7 @@
 const products = [
     {
         createdAt: -172800000,
-        name: "Nike Juniper Trail 2 GORE-TEX",
+        name: "Nike Juniper Pro Trail 2 GORE-TEX",
         image: "https://nikearprod.vtexassets.com/arquivos/ids/877894-1200-1200?width=1200&height=1200&aspect=true",
         price: 199999,
         description: "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
@@ -19,7 +19,7 @@ const products = [
         },
         {
         createdAt: 1716076800000,
-        name: "Nike Invencible 3",
+        name: "Nike Invencible 3 Pro",
         image: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/28810afe-6b6a-4f6a-beb4-701a3539bb02/invincible-3-zapatillas-de-running-asfalto-9lqlcK.png",
         price: 365100,
         description: "Test de imagenmmmmmm",
@@ -56,43 +56,124 @@ const products = [
 ];
 
 const tableBodyHtml = document.getElementById("table-body");
-
-// console.log(tableBodyHtml);
-
+const formAdminHTML = document.getElementById("form-admin");
 
 
 
-products.forEach((prod) => {
+renderProduct(products);
+
+function renderProduct(arrayToRender) {
+
+    //para iniciar con el table body en blanco
+    // porque sino la tabla tiene contenido y cada vez que booro 1 elemento, me vuelve a hacer el bucle y me imprime de nuevo los demas elementos menos el borrado
+    tableBodyHtml.innerHTML = "";
+
+    let total = 0;
+
+    arrayToRender.forEach((prod) => {
     
-    //document.write(`<p> ${prod.name} </p>`);
-    tableBodyHtml.innerHTML += `<tr>
-    <td class="product-image">
-        <img src="${prod.image}" alt="zapatilla">
-    </td>
-    <td class="product-name">
-        ${prod.name}
-    </td>
-    <td class="product-description">
-        <div class="description" title="${prod.description}"> 
-            ${prod.description}
-        </div>
+        total += prod.price;
 
-    </td>
-    <td class="product-fecha">
-        ${prod.createdAt}
-    </td>
-    <td class="product-precio">
-        $ ${prod.price}
-    </td>
-    <td class="product-accion">
-        <button class="btn btn-primary btn-sm">
-            <i class="fa-solid fa-pen"></i>
-        </button>
-        <button class="btn btn-danger btn-sm">
-            <i class="fa-solid fa-trash"></i>
-        </button>
-    </td>
-</tr>`;
+        tableBodyHtml.innerHTML += `<tr>
+        <td class="product-image">
+            <img src="${prod.image}" alt="${prod.name}">
+        </td>
+        <td class="product-name">
+            ${prod.name}
+        </td>
+        <td class="product-description">
+            <div class="description" title="${prod.description}"> 
+                ${prod.description}
+            </div>
+    
+        </td>
+        <td class="product-fecha">
+            ${formatTimestampToDate(prod.createdAt)}
+        </td>
+        <td class="product-precio">
+            $ ${prod.price}
+        </td>
+        <td class="product-accion">
+            <button class="btn btn-primary btn-sm">
+                <i class="fa-solid fa-pen"></i>
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="deleteproduct('${prod.id}')">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </td>
+    </tr>`;
+    });
+
+};
+
+tableBodyHtml.innerHTML += `<tr>
+                                <td colspan="4" class="text-end">total</td>
+                                <td colspan="2" class="fw-bold">${total}</td>
+                            </tr>`
+
+
+function deleteproduct(identificador) {
+    // console.log("id recibido", identificador);
+    const index = products.findIndex(producto => {
+        if (identificador === producto.id) {
+            return true
+        } else {
+            return false
+        }
+
+    });
+    products.splice(index, 1);
+    renderProduct(products);
+}
+
+function searchProduct(evt) {
+    // console.log(evt.target.value);
+
+    let text = evt.target.value;
+    text = text.toLocaleLowerCase();
+
+    const productosFiltrados = products.filter((productito) => {
+        const nombre = productito.name.toLocaleLowerCase();
+        const descripcion = productito.description.toLocaleLowerCase();
+
+        // filtra tanto por nombre como por descripcion
+        if (nombre.includes(text) || descripcion.includes(text) ) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    // console.log(productosFiltrados);
+    renderProduct(productosFiltrados);
+};
+
+formAdminHTML.addEventListener("submit", (evt)=>{
+    evt.preventDefault();
+    // console.log("formulario enviado");
+    
+    const el = evt.target.elements;
+
+    const nuevoProduct = {
+        name: el.name.value,
+        price: el.precio.valueAsNumber,
+        imagen: el.imagen.value,
+        categoria: el.category.value,
+        description: el.description.value,
+        createdAt: el.createdAt.valueAsNumber,
+        id: crypto.randomUUID()
+    };
+
+    // console.log(nuevoProduct);
+
+    products.push(nuevoProduct);
+    renderProduct(products);
+
+    //para reiniciar listado de productos
+    // formAdminHTML.reset();
+
+    // poner foco en un input del form
+    // name.focus();
 });
+
 
 
