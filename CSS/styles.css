@@ -21,7 +21,7 @@
 
     .product-description {
         .description {
-            display: -webkit-box;
+        display: -webkit-box;
         -webkit-line-clamp: 3;
         overflow: hidden;
         -webkit-box-orient: vertical;
