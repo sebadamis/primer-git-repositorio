@@ -1,34 +1,31 @@
-
-
 .table-admin {
-    .table-body {
-        tr:nth-child(even) {
-            background-color: aquamarine;
+
+    #table-body {
+ 
+        tr:nth-child(odd) > td {
+            background-color: #ffffff !important;
         }
     }
 
-    .product-accion {
+    .product-actions {
         vertical-align: middle;
 
         .btn {
+            padding: 4px 0;
             width: 24px;
-            margin: 0 auto;
-            padding: 5px 0;
             text-align: center;
-            
         }
     }
 
     .product-description {
         .description {
-        display: -webkit-box;
-        /* -webkit-line-clamp: 3; */
-        overflow: hidden;
-        -webkit-box-orient: vertical;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
         }
-        
-        
     }
+
     .product-image {
         img {
             width: 75px;
@@ -37,4 +34,10 @@
             border-radius: 50%;
         }
     }
+}
+
+.table-container {
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: auto;
 }
