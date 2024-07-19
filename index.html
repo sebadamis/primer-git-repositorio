@@ -12,15 +12,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Estilos CSS -->
-     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 
 </head>
 <body>
     <nav class="navbar bg-primary">
         <div class="container-fluid">
-          <span class="navbar-brand mb-0 h1 text-white">Product Dashboard</span>
+            <span class="navbar-brand mb-0 h1 text-white">Product Dashboard</span>
         </div>
-      </nav>
+    </nav>
     
     <div class="container-xxl">
         <div class="row g-2">
@@ -29,6 +29,7 @@
                 <div class="p-3">
                     <h2>FORMULARIO</h2>
                     <form class="w-100 px-2" id="form-admin">
+                        <input type="hidden" name="id">
                         <div class="mb-3">
                             <label for="name"  class="form-label">Nombre producto</label>
                             <input  type="text"
@@ -45,7 +46,8 @@
                             <input  type="number" 
                                     name="price" 
                                     id="price"
-                                    class="form-control">
+                                    class="form-control"
+                                    required>
                         </div>
 
                         <div class="row mb-3">
@@ -54,7 +56,8 @@
                                 <input  type="date" 
                                         id="date"
                                         name="createdAt"
-                                        class="form-control">
+                                        class="form-control"
+                                        required>
                             </div>
                             <div class="col-7">
                                 <label for="category" class="form-label">Categoría</label>
@@ -71,12 +74,13 @@
                             <input  type="url" 
                                     name="image"
                                     id="image"
-                                    class="form-control">
+                                    class="form-control"
+                                    required>
                         </div>
-                  
+                
                         <div class="mb-3">
                             <label for="description" class="form-label">Descripción</label>
-                            <textarea class="form-control" name="description" id="description"></textarea>
+                            <textarea class="form-control" name="description" id="description"required></textarea>
                         </div>
                         <div>
                             <button class="btn btn-primary" type="submit">Agregar producto</button>
@@ -89,18 +93,18 @@
                 <div class="p-3">
                     <h2 contenteditable="true">TABLA DE PRODUCTOS</h2>
 
+                    <div class="row d-flex align-items-end mb-3">
+                        <div class="col-10">
+                            <label for="search" class="form-label">Buscar</label>
+                            <input type="text" class="form-control" id="task" oninput="searchProduct(event)">
+                        </div>
+                        <div class="col-2 text-end">
+                            <button class="btn btn-primary" data-sort="desc"><i class="fa-solid fa-caret-down"></i></button>
 
+                            <button class="btn btn-primary"data-sort="asc"><i class="fa-solid fa-caret-up"></i></button>
 
-
-                    <div class="mb-3">
-
-                        <label for="search" class="form-label">Buscar</label>
-                        <input type="text" class="form-control" id="task" oninput="searchProduct(event)">
-
-                        <!-- <div class="button btn btn-success" onclick="agregarTarea()">Buscar</div> -->
-                        <!-- oninput="searchProduct(event)" -->
+                        </div>
                     </div>
-
 
 
 
